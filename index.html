@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DevX Linker | WhatsApp Pair/QR</title>
+  <meta name="description" content="مولِّد Pair Code و QR للربط بواتساب - واجهة تجريبية">
+  <style>
+    :root{
+      --bg1:#0f172a; --bg2:#1e293b; --acc:#22d3ee; --acc2:#06b6d4; --text:#e2e8f0; --muted:#94a3b8; --ok:#22c55e; --warn:#f59e0b; --err:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Tahoma,system-ui,Arial; color:var(--text);
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      background-size:200% 200%;
+      animation:bg 12s ease infinite;
+      display:flex; align-items:center; justify-content:center; padding:20px;
+    }
+    @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .card{
+      width:min(960px,100%); background:#0b1220cc; backdrop-filter: blur(6px);
+      border:1px solid #0b1a2a; border-radius:24px; padding:28px; box-shadow:0 10px 30px #0006;
+    }
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px}
+    .brand{display:flex; align-items:center; gap:10px}
+    .logo{width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,var(--acc),var(--acc2)); display:grid; place-items:center; font-weight:900; color:#002b36}
+    h1{font-size:20px; margin:0}
+    .muted{color:var(--muted); font-size:13px}
+    .tabs{display:flex; gap:8px; margin:12px 0 20px}
+    .tab{
+      padding:10px 16px; border:1px solid #1f2a41; border-radius:999px; cursor:pointer;
+      background:#0f1a2f; color:var(--text); transition:.2s;
+    }
+    .tab.active{background:linear-gradient(135deg,var(--acc),var(--acc2)); color:#0b1220; border-color:transparent; font-weight:700}
+    .grid{display:grid; grid-template-columns: 1.3fr .7fr; gap:18px}
+    @media (max-width:800px){.grid{grid-template-columns:1fr}}
+    .panel{border:1px solid #1f2a41; border-radius:18px; padding:16px}
+    label{display:block; margin:6px 0 8px; font-size:14px}
+    input{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #22314f; background:#0a1326; color:var(--text);
+      outline:none; transition:.2s;
+    }
+    input:focus{border-color:var(--acc)}
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    button{
+      padding:12px 18px; border:none; border-radius:12px; cursor:pointer; font-weight:700; transition:.2s; color:#001219;
+    }
+    .btn-main{background:linear-gradient(135deg,var(--acc),var(--acc2))}
+    .btn-ghost{background:#0a1326; color:var(--text); border:1px solid #22314f}
+    .out{
+      margin-top:14px; padding:12px; border-radius:12px; background:#0a1326; border:1px dashed #20406a; min-height:48px; display:flex; align-items:center; justify-content:space-between; gap:12px
+    }
+    .out code{font-family:ui-monospace,Consolas,monospace; font-size:16px}
+    .qr{
+      width:100%; display:grid; place-items:center; min-height:240px; background:#0a1326; border:1px dashed #20406a; border-radius:12px; padding:12px
+    }
+    .foot{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:16px; flex-wrap:wrap}
+    .badge{font-size:12px; padding:6px 10px; border-radius:999px; background:#0a1326; border:1px solid #22314f}
+    .toast{
+      position:fixed; inset-inline:0; bottom:18px; display:grid; place-items:center; pointer-events:none;
+    }
+    .toast > div{
+      background:#0b1220; border:1px solid #1f2a41; padding:10px 14px; border-radius:10px; box-shadow:0 6px 18px #0008;
+      animation:pop .2s ease; pointer-events:auto
+    }
+    @keyframes pop{from{transform:translateY(6px); opacity:0}to{transform:translateY(0); opacity:1}}
+    a.link{color:var(--acc)}
+    .instructions {
+      margin-top: 20px;
+      padding: 15px;
+      background: #0a1326;
+      border-radius: 12px;
+      border: 1px solid #1f2a41;
+      font-size: 14px;
+    }
+    .instructions h3 {
+      margin-top: 0;
+      color: var(--acc);
+    }
+    .instructions ol {
+      padding-right: 20px;
+    }
+    .instructions li {
+      margin-bottom: 8px;
+    }
+  </style>
+  <!-- مكتبة توليد QR خفيفة -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <main class="card">
+    <header>
+      <div class="brand">
+        <div class="logo">DX</div>
+        <div>
+          <h1>DevX Linker</h1>
+          <div class="muted">ربط واتساب — Pair Code / QR (واجهة تجريبية)</div>
+        </div>
+      </div>
+      <div class="badge">v1.0 • Static</div>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" id="tab-pair">Pair Code</div>
+      <div class="tab" id="tab-qr">QR Code</div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <label for="phone">رقم الهاتف (مع مفتاح الدولة)</label>
+        <input type="text" id="phone" placeholder="مثال: +201234567890" />
+        
+        <div class="row">
+          <button class="btn-main" id="btn-generate">توليد الكود</button>
+          <button class="btn-ghost" id="btn-clear">مسح</button>
+        </div>
+        
+        <div class="out">
+          <code id="code">— الكود هيظهر هنا —</code>
+          <button class="btn-ghost" id="btn-copy">نسخ</button>
+        </div>
+
+        <div class="instructions">
+          <h3>كيفية الاستخدام:</h3>
+          <ol>
+            <li>أدخل رقم الهاتف مع مفتاح الدولة</li>
+            <li>اضغط على "توليد الكود"</li>
+            <li>انسخ الكود وأرسله للبوت للربط</li>
+            <li>أو استخدم رمز QR للمسح الضوئي</li>
+          </ol>
+        </div>
+      </div>
+      
+      <div class="panel">
+        <div class="qr" id="qr">
+          <span class="muted">QR Code سيظهر هنا</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="muted">واجهة تجريبية - غير مرتبطة بخادم حقيقي</span>
+      <span class="badge">DevX @ 2023</span>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" style="display:none"><div></div></div>
+
+  <script>
+    // عناصر DOM
+    const tabs = { 
+      pair: document.getElementById('tab-pair'), 
+      qr: document.getElementById('tab-qr') 
+    };
+    const phoneEl = document.getElementById('phone');
+    const btnGen = document.getElementById('btn-generate');
+    const btnClear = document.getElementById('btn-clear');
+    const btnCopy = document.getElementById('btn-copy');
+    const codeEl = document.getElementById('code');
+    const qrBox = document.getElementById('qr');
+    const toastBox = document.getElementById('toast');
+
+    let mode = 'pair'; // pair | qr
+    let qr;
+
+    function toast(msg){
+      toastBox.style.display='grid';
+      toastBox.firstElementChild.textContent = msg;
+      clearTimeout(toastBox._t);
+      toastBox._t = setTimeout(()=> toastBox.style.display='none', 1700);
+    }
+
+    // تفعيل التاب
+    function setMode(m){
+      mode = m;
+      tabs.pair.classList.toggle('active', m==='pair');
+      tabs.qr.classList.toggle('active', m==='qr');
+      // مجرد توضيح بصري
+      btnGen.textContent = m==='pair' ? 'توليد الكود' : 'توليد QR';
+    }
+    tabs.pair.onclick = ()=> setMode('pair');
+    tabs.qr.onclick = ()=> setMode('qr');
+
+    // مولد كود تجريبي محلي (بدّله لاحقًا بنداء API)
+    function mockPairCode(){
+      const dic = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let s = '';
+      for(let i=0;i<8;i++) s += dic[Math.floor(Math.random()*dic.length)];
+      return s + '-' + Math.floor(1000+Math.random()*9000);
+    }
+
+    // فلترة بسيطة للرقم
+    function normalizePhone(v){
+      v = (v||'').toString().replace(/[^\d+]/g,'');
+      if(v.startsWith('00')) v = '+'+v.slice(2);
+      if(!v.startsWith('+') && /^\d+$/.test(v)) v = '+'+v;
+      return v;
+    }
+
+    // توليد
+    btnGen.onclick = async ()=>{
+      const phone = normalizePhone(phoneEl.value);
+      if(phone.length < 8){ toast('رقم غير صالح'); phoneEl.focus(); return; }
+
+      codeEl.textContent = '... جاري التوليد';
+
+      try{
+        // === (لو عندك باك إند) استبدل البلوك ده بنداء فعلي ===
+        // const res = await fetch('/api/pair-code',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({phone, mode})});
+        // const data = await res.json();  // { code: 'XXXX-1234', qrData: '...' }
+        // const code = data.code;
+        // const qrData = data.qrData || code;
+        // =====================================================
+
+        // تجربة محلية بدون خادم:
+        const code = mockPairCode();
+        const qrData = code + '|' + phone;
+
+        codeEl.textContent = code;
+        renderQR(qrData);
+        toast(mode==='pair' ? 'اتولد كود تجريبي' : 'اتولد QR تجريبي');
+      }catch(e){
+        codeEl.textContent = 'حصل خطأ';
+        toast('مشكلة في التوليد');
+        console.error(e);
+      }
+    };
+
+    // نسخ
+    btnCopy.onclick = async ()=>{
+      const t = codeEl.textContent.trim();
+      if(!t || t.startsWith('—')) return toast('مفيش حاجة تتنسخ');
+      try{ await navigator.clipboard.writeText(t); toast('اتنسخ ✅'); }catch{ toast('انسخ يدويًا'); }
+    };
+
+    // مسح
+    btnClear.onclick = ()=>{
+      phoneEl.value=''; codeEl.textContent='— الكود هيظهر هنا —';
+      qrBox.innerHTML='<span class="muted">QR Code سيظهر هنا</span>';
+    };
+
+    // رسم QR
+    function renderQR(text){
+      if(!window.QRCode) return;
+      qrBox.innerHTML='';
+      qr = new QRCode(qrBox, { text, width: 220, height: 220 });
+    }
+
+    // وضع افتراضي
+    setMode('pair');
+  </script>
+</body>
+  </html>
