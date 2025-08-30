@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بروفايلي</title>
+  <title>بروفايلي - Gamal</title>
   <style>
     body {
       margin: 0;
@@ -18,6 +18,11 @@
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
     }
     header {
       padding: 50px 20px;
@@ -39,8 +44,11 @@
       color: #ffcc00;
     }
     section {
-      padding: 50px 20px;
+      padding: 30px 20px;
       animation: fadeUp 2s ease-in-out;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
     }
     h2 {
       font-size: 1.8rem;
@@ -62,6 +70,13 @@
       background: #ffcc00;
       color: #000;
     }
+    .projects p {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 15px auto;
+    }
     a.button {
       display: inline-block;
       margin-top: 20px;
@@ -82,6 +97,7 @@
       padding: 20px;
       font-size: 0.9rem;
       margin-top: 40px;
+      border-radius: 10px;
     }
     /* Animations */
     @keyframes fadeIn {
@@ -95,188 +111,39 @@
   </style>
 </head>
 <body>
-  <header>
-    <img src="https://i.pravatar.cc/150?img=5" alt="profile">
-    <h1>👋 أهلاً أنا Gamal</h1>
-    <p>مطور مواقع - بحب أتعلم وابتكر</p>
-  </header>
+  <div class="container">
+    <header>
+      <img src="https://i.pravatar.cc/150?img=5" alt="صورة البروفايل">
+      <h1>👋 أهلاً أنا Gamal</h1>
+      <p>مطور مواقع - بحب أتعلم وابتكر</p>
+    </header>
 
-  <section>
-    <h2>⚡ المهارات</h2>
-    <div class="skills">
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>JavaScript</span>
-      <span>React</span>
-      <span>Next.js</span>
-    </div>
-  </section>
+    <section>
+      <h2>⚡ المهارات</h2>
+      <div class="skills">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>React</span>
+        <span>Next.js</span>
+      </div>
+    </section>
 
-  <section>
-    <h2>🚀 المشاريع</h2>
-    <p>مشروع 1</p>
-    <p>مشروع 2</p>
-  </section>
+    <section class="projects">
+      <h2>🚀 المشاريع</h2>
+      <p>مشروع 1</p>
+      <p>مشروع 2</p>
+    </section>
 
-  <section>
-    <h2>📩 تواصل معايا</h2>
-    <p>إيميل: gamal2008x@gmail.com</p>
-    <a class="button" href="https://wa.me/201555154341">💬 تواصل واتساب</a>
-  </section>
+    <section>
+      <h2>📩 تواصل معايا</h2>
+      <p>إيميل: gamal2008x@gmail.com</p>
+      <a class="button" href="https://wa.me/201555154341">💬 تواصل واتساب</a>
+    </section>
 
-  <footer>
-    © 2025 - Gamal | DevX Store
-  </footer>
-</body>
-</html>      margin-bottom: 15px;
-      border: 3px solid #fff;
-    }
-    .card h2 {
-      margin: 10px 0;
-    }
-    .links a {
-      display: inline-block;
-      margin: 8px;
-      padding: 10px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      background: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .links a:hover {
-      background: #fff;
-      color: #000;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <img src="https://i.pravatar.cc/150?img=3" alt="profile">
-    <h2>محمد أحمد</h2>
-    <p>مطور مواقع & مصمم جرافيك</p>
-    <div class="links">
-      <a href="https://wa.me/201555154341">واتساب</a>
-      <a href="https://facebook.com">فيسبوك</a>
-      <a href="https://linkedin.com">لينكدإن</a>
-    </div>
+    <footer>
+      © 2025 - Gamal | DevX Store
+    </footer>
   </div>
-</body>
-</html>    section {
-      padding: 50px 20px;
-      animation: fadeUp 2s ease-in-out;
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #fff;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-    .skills span {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      margin: 8px;
-      padding: 10px 18px;
-      border-radius: 25px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .skills span:hover {
-      background: #ffcc00;
-      color: #000;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 20px;
-      background: #25D366;
-      color: #fff;
-      padding: 12px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    a.button:hover {
-      background: #128C7E;
-    }
-    footer {
-      background: rgba(0,0,0,0.3);
-      padding: 20px;
-      font-size: 0.9rem;
-      margin-top: 40px;
-    }
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>👋 أهلاً أنا Gamal</h1>
-    <p>مطور مواقع - بحب أتعلم وابتكر</p>
-  </header>
-
-  <section>
-    <h2>⚡ المهارات</h2>
-    <div class="skills">
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>JavaScript</span>
-      <span>React</span>
-      <span>Next.js</span>
-    </div>
-  </section>
-
-  <section>
-    <h2>🚀 المشاريع</h2>
-    <ul style="list-style:none; padding:0;">
-      <li><a href="#" style="color:#ffcc00; text-decoration:none;">مشروع 1</a></li>
-      <li><a href="#" style="color:#ffcc00; text-decoration:none;">مشروع 2</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>📩 تواصل معايا</h2>
-    <p>إيميل: gamal2008x@gmail.com</p>
-    <a href="https://wa.me/201555154341" target="_blank" class="button">💬 تواصل واتساب</a>
-  </section>
-
-  <footer>
-    © 2025 - Gamal | DevX Store
-  </footer>
-</body>
-</html>      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #0ea5e9;
-      color: #fff;
-    }
-    footer {
-      margin-top: 50px;
-      padding: 20px;
-      background: #0f172a;
-      font-size: 0.9rem;
-      color: #94a3b8;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>مرحباً بيك في Devx.store 🚀</h1>
-    <p>منصّة تقنية لتطوير أدوات، سكريبتات، وحلول برمجية حديثة 👨‍💻</p>
-    <a href="#" class="btn">قريباً - إعرف أكتر</a>
-  </header>
-  <footer>
-    © 2025 Devx.store - كل الحقوق محفوظة
-  </footer>
 </body>
 </html>
