@@ -3,38 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بورتفوليو - DevX</title>
+  <title>الكارت الشخصي</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
     body {
-      color: #fff;
-      text-align: center;
-      background: linear-gradient(-45deg, #1e3c72, #2a5298, #00c6ff, #0072ff);
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Tahoma, sans-serif;
+      background: linear-gradient(-45deg, #ff512f, #dd2476, #24c6dc, #514a9d);
       background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
+      animation: gradient 10s ease infinite;
+      color: #fff;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
-    header {
-      padding: 80px 20px;
-      animation: fadeIn 2s ease-in-out;
+    .card {
+      background: rgba(0,0,0,0.5);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-width: 300px;
     }
-    header h1 {
-      font-size: 3rem;
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
       margin-bottom: 15px;
+      border: 3px solid #fff;
     }
-    header p {
-      font-size: 1.2rem;
+    .card h2 {
+      margin: 10px 0;
     }
-    section {
+    .links a {
+      display: inline-block;
+      margin: 8px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .links a:hover {
+      background: #fff;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://i.pravatar.cc/150?img=3" alt="profile">
+    <h2>محمد أحمد</h2>
+    <p>مطور مواقع & مصمم جرافيك</p>
+    <div class="links">
+      <a href="https://wa.me/201555154341">واتساب</a>
+      <a href="https://facebook.com">فيسبوك</a>
+      <a href="https://linkedin.com">لينكدإن</a>
+    </div>
+  </div>
+</body>
+</html>    section {
       padding: 50px 20px;
       animation: fadeUp 2s ease-in-out;
     }
