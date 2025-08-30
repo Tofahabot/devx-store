@@ -3,147 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بروفايلي - Gamal</title>
+  <title>ܥܠܡ⁩ - البروفايل</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Tahoma, sans-serif;
-      background: linear-gradient(-45deg, #ff512f, #dd2476, #24c6dc, #514a9d);
-      background-size: 400% 400%;
-      animation: gradient 10s ease infinite;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1a0000, #2a0000, #000000);
       color: #fff;
-      text-align: center;
+      min-height: 100vh;
+      padding: 20px;
+      background-attachment: fixed;
     }
-    @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+    
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 20px;
     }
+    
     header {
-      padding: 50px 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-    header img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #fff;
-      margin-bottom: 15px;
-    }
-    header h1 {
-      margin: 10px 0;
-      font-size: 2rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #ffcc00;
-    }
-    section {
-      padding: 30px 20px;
-      animation: fadeUp 2s ease-in-out;
-      margin-bottom: 20px;
-      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
       border-radius: 15px;
+      background: rgba(90, 0, 0, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      border: 1px solid rgba(120, 0, 0, 0.5);
     }
+    
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #800;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: #ff3333;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    
+    .bio {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      border-right: 3px solid #800;
+      border-left: 3px solid #800;
+    }
+    
+    .section {
+      background: rgba(40, 0, 0, 0.4);
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(120, 0, 0, 0.3);
+    }
+    
     h2 {
       font-size: 1.8rem;
+      color: #ff4d4d;
       margin-bottom: 20px;
-      border-bottom: 2px solid #fff;
-      display: inline-block;
-      padding-bottom: 5px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #800;
+      text-align: center;
     }
-    .skills span {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      margin: 8px;
-      padding: 10px 18px;
-      border-radius: 25px;
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .skill {
+      background: rgba(120, 0, 0, 0.3);
+      padding: 12px 25px;
+      border-radius: 30px;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      border: 1px solid #800;
     }
-    .skills span:hover {
-      background: #ffcc00;
-      color: #000;
+    
+    .skill:hover {
+      background: rgba(200, 0, 0, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
     }
-    .projects p {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
+    
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .project {
+      background: rgba(30, 0, 0, 0.4);
+      padding: 20px;
       border-radius: 10px;
-      max-width: 400px;
-      margin: 15px auto;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(120, 0, 0, 0.3);
     }
-    a.button {
-      display: inline-block;
-      margin-top: 20px;
-      background: #25D366;
-      color: #fff;
+    
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.2);
+      background: rgba(60, 0, 0, 0.4);
+    }
+    
+    .project h3 {
+      color: #ff6666;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+    
+    .contact-info {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(120, 0, 0, 0.3);
+      color: white;
       padding: 12px 25px;
       border-radius: 30px;
       text-decoration: none;
-      font-size: 1.1rem;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      border: 1px solid #800;
     }
-    a.button:hover {
-      background: #128C7E;
+    
+    .contact-link:hover {
+      background: rgba(200, 0, 0, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
     }
+    
     footer {
-      background: rgba(0,0,0,0.3);
-      padding: 20px;
-      font-size: 0.9rem;
+      text-align: center;
       margin-top: 40px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 10px;
+      border-top: 2px solid #800;
     }
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    .blood-effect {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      opacity: 0.1;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,40 Q30,20 50,50 Q70,80 80,60 Q90,40 70,30 Q50,20 30,30 Q10,40 20,40 Z" fill="%23800"/></svg>');
+      background-size: 200px;
+      z-index: -1;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .bio {
+        font-size: 1.1rem;
+      }
+      
+      .projects {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <img src="https://i.pravatar.cc/150?img=5" alt="صورة البروفايل">
-      <h1>👋 أهلاً أنا Gamal</h1>
-      <p>مطور مواقع - بحب أتعلم وابتكر</p>
+      <div class="blood-effect"></div>
+      <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="صورة البروفايل" class="profile-img">
+      <h1>ܥܠܡ⁩</h1>
+      <p class="bio">حشد العقلاء أمر معقد للغاية أما حشد القطيع فلا يحتاج سوى راعي وكلب</p>
     </header>
-
-    <section>
-      <h2>⚡ المهارات</h2>
+    
+    <section class="section">
+      <h2>المهارات</h2>
       <div class="skills">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>React</span>
-        <span>Next.js</span>
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+        <span class="skill">Next.js</span>
+        <span class="skill">UI/UX Design</span>
+        <span class="skill">Problem Solving</span>
       </div>
     </section>
-
-    <section class="projects">
-      <h2>🚀 المشاريع</h2>
-      <p>مشروع 1</p>
-      <p>مشروع 2</p>
+    
+    <section class="section">
+      <h2>المشاريع</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>مشروع نظام إدارة المحتوى</h3>
+          <p>نظام متكامل لإدارة المحتوى مع واجهة مستخدم سهلة الاستخدام</p>
+        </div>
+        <div class="project">
+          <h3>تطبيق المهام اليومية</h3>
+          <p>تطبيق ويب لإدارة المهام اليومية مع ميزة المزامنة بين الأجهزة</p>
+        </div>
+        <div class="project">
+          <h3>منصة التعلم الإلكتروني</h3>
+          <p>منصة تعليمية متكاملة مع إمكانية حضور الدروس مباشرة</p>
+        </div>
+      </div>
     </section>
-
-    <section>
-      <h2>📩 تواصل معايا</h2>
-      <p>إيميل: gamal2008x@gmail.com</p>
-      <a class="button" href="https://wa.me/201555154341">💬 تواصل واتساب</a>
+    
+    <section class="section">
+      <h2>التواصل</h2>
+      <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> البريد الإلكتروني: example@domain.com</p>
+        <p><i class="fas fa-phone"></i> رقم الهاتف: +201050977255</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link"><i class="fab fa-whatsapp"></i> واتساب</a>
+        <a href="#" class="contact-link"><i class="fab fa-twitter"></i> تويتر</a>
+        <a href="#" class="contact-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="contact-link"><i class="fab fa-linkedin"></i> لينكدإن</a>
+      </div>
     </section>
-
+    
     <footer>
-      © 2025 - Gamal | DevX Store
+      <p>© 2023 - ܥܠܡ⁩ | جميع الحقوق محفوظة</p>
     </footer>
   </div>
+  
+  <script>
+    // تأثيرات تفاعلية بسيطة
+    document.addEventListener('DOMContentLoaded', function() {
+      const skills = document.querySelectorAll('.skill');
+      const projects = document.querySelectorAll('.project');
+      
+      skills.forEach(skill => {
+        skill.addEventListener('mouseenter', () => {
+          skill.style.transform = 'translateY(-5px)';
+        });
+        
+        skill.addEventListener('mouseleave', () => {
+          skill.style.transform = 'translateY(0)';
+        });
+      });
+      
+      // تأثيرات للمشاريع
+      projects.forEach(project => {
+        project.addEventListener('mouseenter', () => {
+          project.style.transform = 'translateY(-5px)';
+        });
+        
+        project.addEventListener('mouseleave', () => {
+          project.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
