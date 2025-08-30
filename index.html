@@ -1,40 +1,131 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Devx.store 🚀</title>
+  <title>بورتفوليو - DevX</title>
   <style>
-    body {
-      font-family: 'Tahoma', sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
       color: #fff;
       text-align: center;
+      background: linear-gradient(-45deg, #1e3c72, #2a5298, #00c6ff, #0072ff);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     header {
-      padding: 50px 20px;
+      padding: 80px 20px;
+      animation: fadeIn 2s ease-in-out;
     }
-    h1 {
+    header h1 {
       font-size: 3rem;
-      margin-bottom: 10px;
-      color: #38bdf8;
+      margin-bottom: 15px;
     }
-    p {
+    header p {
       font-size: 1.2rem;
-      color: #e2e8f0;
     }
-    .btn {
+    section {
+      padding: 50px 20px;
+      animation: fadeUp 2s ease-in-out;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #fff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .skills span {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 8px;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .skills span:hover {
+      background: #ffcc00;
+      color: #000;
+    }
+    a.button {
       display: inline-block;
       margin-top: 20px;
+      background: #25D366;
+      color: #fff;
       padding: 12px 25px;
-      background: #38bdf8;
-      color: #0f172a;
       border-radius: 30px;
-      font-weight: bold;
       text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
       transition: 0.3s;
+    }
+    a.button:hover {
+      background: #128C7E;
+    }
+    footer {
+      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>👋 أهلاً أنا Gamal</h1>
+    <p>مطور مواقع - بحب أتعلم وابتكر</p>
+  </header>
+
+  <section>
+    <h2>⚡ المهارات</h2>
+    <div class="skills">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>React</span>
+      <span>Next.js</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>🚀 المشاريع</h2>
+    <ul style="list-style:none; padding:0;">
+      <li><a href="#" style="color:#ffcc00; text-decoration:none;">مشروع 1</a></li>
+      <li><a href="#" style="color:#ffcc00; text-decoration:none;">مشروع 2</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📩 تواصل معايا</h2>
+    <p>إيميل: gamal2008x@gmail.com</p>
+    <a href="https://wa.me/201555154341" target="_blank" class="button">💬 تواصل واتساب</a>
+  </section>
+
+  <footer>
+    © 2025 - Gamal | DevX Store
+  </footer>
+</body>
+</html>      transition: 0.3s;
     }
     .btn:hover {
       background: #0ea5e9;
