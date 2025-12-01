@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ديفكس هوست - أفضل وأرخص استضافة لسيرفرات البوتات</title>
+    <meta name="description" content="أفضل وأرخص استضافة لسيرفرات البوتات مع دعم 24/7 وضمان 30 يوم">
+    
+    <!-- Google Fonts - Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <style>
+        :root {
+            /* Color System */
+            --gradient-start: #8A2BE2;
+            --gradient-end: #4F46E5;
+            --primary-500: #7C3AED;
+            
+            --page-background: #0A0A0A;
+            --card-background: #141414;
+            --text-primary: #E4E4E7;
+            --text-secondary: #A1A1AA;
+            --borders: #27272A;
+            
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            
+            /* Spacing System */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 64px;
+            --space-xxl: 96px;
+            
+            /* Border Radius */
+            --radius: 16px;
+            
+            /* Typography */
+            --font-family: 'Tajawal', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background: var(--page-background);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Background Effects */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-sm);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: var(--space-xxl) 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        /* Welcome Message */
+        .welcome-message {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .brand-name {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+        }
+        
+        .tagline {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Legacy styles for compatibility */
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Contact Buttons */
+        .contact-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            border: 1px solid var(--text-secondary);
+            background: transparent;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+        
+        .contact-btn:hover {
+            border-color: var(--primary-500);
+            color: var(--primary-500);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+        }
+        
+        /* Order Form */
+        .order-form {
+            background: var(--card-background);
+            border: 1px solid var(--borders);
+            border-radius: var(--radius);
+            padding: var(--space-xl);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+            backdrop-filter: blur(20px);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            height: 56px;
+            background: var(--page-background);
+            border: 1px solid var(--borders);
+            border-radius: calc(var(--radius) / 2);
+            padding: 0 var(--space-md);
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+        
+        .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        /* Selected Package Display */
+        .selected-package {
+            background: var(--page-background);
+            border: 1px solid var(--primary-500);
+            border-radius: calc(var(--radius) / 2);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            display: none;
+        }
+        
+        .selected-package.show {
+            display: block;
+        }
+        
+        .selected-package h4 {
+            color: var(--primary-500);
+            margin-bottom: var(--space-xs);
+            font-size: 18px;
+        }
+        
+        .selected-package .price {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+
+        
+        .pricing-card.selected {
+            border: 2px solid var(--primary-500);
+            background: linear-gradient(145deg, var(--card-background), rgba(124, 58, 237, 0.1));
+            box-shadow: 0 0 24px rgba(124, 58, 237, 0.3);
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: var(--space-xl) 0;
+        }
+        
+        .pricing-section h2 {
+            text-align: center;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            color: var(--text-primary);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .pricing-card {
+            background: var(--card-background);
+            border: 1px solid var(--borders);
+            border-radius: var(--radius);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-500);
+            box-shadow: 0 0 32px rgba(124, 58, 237, 0.3);
+        }
+        
+        .pricing-card.featured {
+            border: 1px solid var(--primary-500);
+            background: linear-gradient(145deg, var(--card-background), rgba(124, 58, 237, 0.1));
+            box-shadow: 0 0 24px rgba(124, 58, 237, 0.3);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'الأكثر شعبية';
+            position: absolute;
+            top: -12px;
+            right: var(--space-md);
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .price {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .specs {
+            margin-bottom: var(--space-md);
+        }
+        
+        .specs li {
+            list-style: none;
+            padding: 4px 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+        }
+        
+        .specs li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+
+        
+        /* Action Button */
+        .action-button {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            height: 56px;
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            border: none;
+            border-radius: var(--radius);
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-transform: none;
+        }
+        
+        .action-button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+        }
+        
+        .action-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+            box-shadow: none;
+        }
+        
+        .action-button.secondary {
+            background: transparent;
+            border: 1px solid var(--text-secondary);
+            color: var(--text-secondary);
+            max-width: 200px;
+            margin: var(--space-sm) auto 0;
+        }
+        
+        .action-button.secondary:hover {
+            border-color: var(--primary-500);
+            color: var(--primary-500);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+        }
+        
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--card-background);
+            border: 1px solid var(--borders);
+            border-radius: var(--radius);
+            padding: var(--space-xl);
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .modal-content h3 {
+            color: var(--success);
+            margin-bottom: var(--space-md);
+            font-size: 24px;
+        }
+        
+        .modal-content p {
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+        
+        /* Error Messages */
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: var(--space-xs);
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        /* Duration Selector */
+        .duration-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .duration-options {
+            display: flex;
+            background: var(--card-background);
+            border: 1px solid var(--borders);
+            border-radius: var(--radius);
+            padding: 8px;
+            gap: 8px;
+        }
+        
+        .duration-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 16px 24px;
+            background: transparent;
+            border: none;
+            border-radius: calc(var(--radius) / 2);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            min-width: 120px;
+        }
+        
+        .duration-btn span {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .duration-btn small {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .duration-btn.active {
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            color: white;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+        }
+        
+        .duration-btn:not(.active):hover {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary-500);
+        }
+
+        /* Order Section */
+        .order-section {
+            padding: var(--space-xl) 0;
+            background: linear-gradient(145deg, var(--page-background), rgba(124, 58, 237, 0.05));
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--borders);
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 20px;
+            }
+            
+            .brand-name {
+                font-size: 42px;
+            }
+            
+            .tagline {
+                font-size: 22px;
+            }
+            
+            .description {
+                font-size: 16px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .trust-badges {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+            
+            .pricing-section {
+                padding: var(--space-lg) 0;
+            }
+            
+            .pricing-section h2 {
+                font-size: 32px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: var(--space-xs);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <!-- Welcome Message -->
+            <div class="welcome-message fade-in-up">
+                <h3 class="welcome-text">مرحباً بك في</h3>
+                <h1 class="brand-name">ديفكس هوست</h1>
+                <p class="tagline">استضافة سيرفرات متميزة</p>
+                <p class="description">أفضل وأرخص استضافة لسيرفرات البوتات</p>
+            </div>
+            
+            <!-- Contact Button -->
+            <div class="contact-buttons fade-in-up">
+                <a href="https://wa.me/201555154341" target="_blank" class="contact-btn">
+                    <i data-lucide="message-circle"></i>
+                    تواصل معنا عبر واتساب
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="fade-in-up">اختر باقتك المناسبة</h2>
+            
+            <!-- Duration Selector -->
+            <div class="duration-selector fade-in-up">
+                <h3 style="text-align: center; margin-bottom: var(--space-md); color: var(--text-secondary); font-size: 16px;">اختر مدة الباقة</h3>
+                <div class="duration-options">
+                    <button class="duration-btn active" data-duration="monthly">
+                        <span>شهري</span>
+                        <small>وفر 20%</small>
+                    </button>
+                    <button class="duration-btn" data-duration="weekly">
+                        <span>أسبوعي</span>
+                        <small>تجربة سريعة</small>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in-up" data-package="basic" data-currency="EGP">
+                    <h3>أساسية</h3>
+                    <div class="price">25 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>4096 MB RAM</li>
+                        <li>20 GB مساحة تخزين</li>
+                        <li>100% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card fade-in-up" data-package="standard" data-currency="EGP">
+                    <h3>متقدمة</h3>
+                    <div class="price">35 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>6144 MB RAM</li>
+                        <li>30 GB مساحة تخزين</li>
+                        <li>125% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card fade-in-up" data-package="professional" data-currency="EGP">
+                    <h3>احترافية</h3>
+                    <div class="price">45 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>8192 MB RAM</li>
+                        <li>40 GB مساحة تخزين</li>
+                        <li>150% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card fade-in-up" data-package="premium" data-currency="EGP">
+                    <h3>مميزة</h3>
+                    <div class="price">55 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>10240 MB RAM</li>
+                        <li>50 GB مساحة تخزين</li>
+                        <li>175% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card fade-in-up" data-package="business" data-currency="EGP">
+                    <h3>تجارية</h3>
+                    <div class="price">65 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>12288 MB RAM</li>
+                        <li>60 GB مساحة تخزين</li>
+                        <li>200% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card fade-in-up" data-package="enterprise" data-currency="EGP">
+                    <h3>مؤسسية</h3>
+                    <div class="price">80 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>16384 MB RAM</li>
+                        <li>80 GB مساحة تخزين</li>
+                        <li>225% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card fade-in-up" data-package="premium+" data-currency="EGP">
+                    <h3>مميزة بلاس</h3>
+                    <div class="price">100 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>20480 MB RAM</li>
+                        <li>100 GB مساحة تخزين</li>
+                        <li>250% معالج</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card featured fade-in-up" data-package="ultimate" data-currency="EGP">
+                    <h3>الخاصة</h3>
+                    <div class="price">150 جنيه شهرياً</div>
+                    <ul class="specs">
+                        <li>غير محدودة RAM</li>
+                        <li>غير محدودة مساحة تخزين</li>
+                        <li>غير محدود معالج</li>
+                        <li>دعم أولوية عالية</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Order Section -->
+    <section class="order-section">
+        <div class="container">
+            <h2 class="fade-in-up" style="text-align: center; margin-bottom: var(--space-xl);">اطلب خدمتك الآن</h2>
+            
+            <!-- Order Form -->
+            <form class="order-form fade-in-up" id="orderForm">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="اكتب اسمك هنا" required>
+                    <div class="error-message" id="usernameError">يرجى إدخال اسم المستخدم</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="اكتب إيميلك هنا" required>
+                    <div class="error-message" id="emailError">يرجى إدخال بريد إلكتروني صحيح</div>
+                </div>
+                
+                <!-- Selected Package Display -->
+                <div class="selected-package" id="selectedPackage">
+                    <h4>الباقة المختارة</h4>
+                    <div class="package-info">
+                        <span class="package-name"></span> - <span class="price"></span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="action-button" id="whatsappBtn">
+                    <span id="buttonText">متابعة للدفع</span>
+                </button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h3>تم الدفع بنجاح! 🎉</h3>
+            <p>شكراً لك! تم تأكيد طلبك وسيتم تفعيل خدمتك خلال دقائق.</p>
+            <p>رقم الطلب: <span id="orderId"></span></p>
+            <p>سيتم إرسال تفاصيل الحساب إلى بريدك الإلكتروني.</p>
+            <button class="action-button" onclick="closeModal()">إغلاق</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ديفكس هوست. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <script>
+        let selectedPackage = 'ultimate';
+        let selectedDuration = 'monthly'; // 'weekly' or 'monthly'
+        let isProcessing = false;
+        let vodafonePayment = null;
+        
+        // Package information with pricing for different durations
+        const packageInfo = {
+            'basic': { 
+                name: 'أساسية', 
+                prices: { weekly: 10, monthly: 25 }
+            },
+            'standard': { 
+                name: 'متقدمة', 
+                prices: { weekly: 15, monthly: 35 }
+            },
+            'professional': { 
+                name: 'احترافية', 
+                prices: { weekly: 20, monthly: 45 }
+            },
+            'premium': { 
+                name: 'مميزة', 
+                prices: { weekly: 25, monthly: 55 }
+            },
+            'business': { 
+                name: 'تجارية', 
+                prices: { weekly: 30, monthly: 65 }
+            },
+            'enterprise': { 
+                name: 'مؤسسية', 
+                prices: { weekly: 35, monthly: 80 }
+            },
+            'premium+': { 
+                name: 'مميزة بلاس', 
+                prices: { weekly: 45, monthly: 100 }
+            },
+            'ultimate': { 
+                name: 'الخاصة', 
+                prices: { weekly: 65, monthly: 150 }
+            }
+        };
+        
+        // Helper function to get current price
+        function getCurrentPrice(packageId) {
+            return packageInfo[packageId].prices[selectedDuration];
+        }
+        
+        // Initialize Lucide Icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            initializeEventListeners();
+            setDefaultSelection();
+        });
+        
+        function initializeEventListeners() {
+            // Package selection
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    selectPackage(this);
+                });
+            });
+            
+            // Duration selection
+            document.querySelectorAll('.duration-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeDuration(this);
+                });
+            });
+            
+            // Form submission
+            document.getElementById('orderForm').addEventListener('submit', handleFormSubmit);
+            
+            // WhatsApp button
+            document.getElementById('whatsappBtn').addEventListener('click', sendWhatsAppOrder);
+            
+            // Form validation
+            validateForm();
+        }
+        
+        function changeDuration(button) {
+            // Remove active class from all duration buttons
+            document.querySelectorAll('.duration-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Update selected duration
+            selectedDuration = button.dataset.duration;
+            
+            // Update all pricing cards
+            updateAllPricingCards();
+            
+            // Update selected package display
+            updateSelectedPackage();
+        }
+        
+        function updateAllPricingCards() {
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                const packageId = card.dataset.package;
+                const price = getCurrentPrice(packageId);
+                const priceElement = card.querySelector('.price');
+                
+                if (priceElement) {
+                    const durationText = selectedDuration === 'weekly' ? 'أسبوعياً' : 'شهرياً';
+                    priceElement.textContent = `${price} جنيه ${durationText}`;
+                }
+            });
+        }
+        
+        function selectPackage(card) {
+            // Remove selected state from all cards
+            document.querySelectorAll('.pricing-card').forEach(c => {
+                c.classList.remove('selected');
+                c.style.borderColor = 'var(--borders)';
+            });
+            
+            // Add selected state to clicked card
+            card.classList.add('selected');
+            card.style.borderColor = 'var(--primary-500)';
+            
+            // Update selected package
+            selectedPackage = card.dataset.package;
+            
+            // Update form display
+            updateSelectedPackage();
+        }
+        
+
+        
+        function updateSelectedPackage() {
+            const selectedPackageDiv = document.getElementById('selectedPackage');
+            const packageName = selectedPackageDiv.querySelector('.package-name');
+            const price = selectedPackageDiv.querySelector('.price');
+            
+            const pkg = packageInfo[selectedPackage];
+            const currentPrice = getCurrentPrice(selectedPackage);
+            const durationText = selectedDuration === 'weekly' ? 'أسبوعياً' : 'شهرياً';
+            
+            packageName.textContent = pkg.name;
+            price.textContent = `${currentPrice} جنيه ${durationText}`;
+            
+            selectedPackageDiv.classList.add('show');
+        }
+        
+        function setDefaultSelection() {
+            const featuredCard = document.querySelector('.pricing-card.featured');
+            if (featuredCard) {
+                featuredCard.classList.add('selected');
+                featuredCard.style.borderColor = 'var(--primary-500)';
+                selectedPackage = featuredCard.dataset.package;
+                updateSelectedPackage();
+            }
+            
+            // Update all pricing cards to show monthly prices by default
+            updateAllPricingCards();
+        }
+        
+        function validateForm() {
+            const username = document.getElementById('username');
+            const email = document.getElementById('email');
+            const usernameError = document.getElementById('usernameError');
+            const emailError = document.getElementById('emailError');
+            
+            function validateField(field, errorElement, validationFn, errorMessage) {
+                if (validationFn(field.value)) {
+                    errorElement.classList.remove('show');
+                    field.style.borderColor = 'var(--borders)';
+                    return true;
+                } else {
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.add('show');
+                    field.style.borderColor = 'var(--error)';
+                    return false;
+                }
+            }
+            
+            username.addEventListener('input', function() {
+                validateField(this, usernameError, value => value.trim().length >= 3, 'اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
+            });
+            
+            email.addEventListener('input', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                validateField(this, emailError, value => emailRegex.test(value), 'يرجى إدخال بريد إلكتروني صحيح');
+            });
+        }
+        
+        function showLoading(button, text) {
+            const buttonText = button.querySelector('#buttonText') || button;
+            button.disabled = true;
+            if (buttonText) {
+                buttonText.innerHTML = `<span class="loading-spinner"></span>${text}`;
+            } else {
+                button.innerHTML = `<span class="loading-spinner"></span>${text}`;
+            }
+        }
+        
+        function hideLoading(button, originalText) {
+            const buttonText = button.querySelector('#buttonText') || button;
+            button.disabled = false;
+            if (buttonText) {
+                buttonText.textContent = originalText;
+            } else {
+                button.textContent = originalText;
+            }
+        }
+        
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            if (isProcessing) return;
+            
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            
+            // Validate fields
+            if (!username || !email) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // Additional validation
+            if (username.length < 3) {
+                alert('اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('يرجى إدخال بريد إلكتروني صحيح');
+                return;
+            }
+            
+            isProcessing = true;
+            sendWhatsAppOrder();
+            isProcessing = false;
+        }
+        
+
+        
+
+        
+        function sendWhatsAppOrder() {
+            if (isProcessing) return;
+            
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            
+            if (!username || !email) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            const pkg = packageInfo[selectedPackage];
+            const currentPrice = getCurrentPrice(selectedPackage);
+            const durationText = selectedDuration === 'weekly' ? 'أسبوعياً' : 'شهرياً';
+            
+            const message = `طلب استضافة سيرفر جديدة%0A%0A` +
+                           `الباقة: ${pkg.name}%0A` +
+                           `المدة: ${durationText}%0A` +
+                           `السعر: ${currentPrice} جنيه%0A` +
+                           `اسم المستخدم: ${username}%0A` +
+                           `البريد الإلكتروني: ${email}%0A%0A`;
+            
+            const whatsappUrl = `https://wa.me/201555154341?text=${message}`;
+            
+            showLoading(whatsappBtn, 'جاري التوجيه...');
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                hideLoading(whatsappBtn, 'إرسال عبر واتساب');
+            }, 1000);
+        }
+        
+        function showSuccessModal(orderId) {
+            document.getElementById('orderId').textContent = orderId;
+            document.getElementById('successModal').classList.add('show');
+        }
+        
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+        
+        function resetForm() {
+            document.getElementById('orderForm').reset();
+            setDefaultSelection();
+        }
+        
+        // Close modal on outside click
+        document.getEventById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in-up elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+        
+        // Auto-hide loading spinner when page is fully loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.loading-spinner').forEach(spinner => {
+                    spinner.style.display = 'none';
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
